@@ -11,8 +11,18 @@ El código en este repositorio es un sitio wordpress, basicamente con dos plugin
 ### Requirimientos:
 1.PHP version 7  o superior.
 
-1.MySQL version 5.6 o superior.
+2.MySQL version 5.6 o superior.
 
-1.Servidor web(apache o nginx)
+3.Servidor web(apache o nginx)
+
+### Despligue
+
+Para este paso debe de configurar su servidor web ya sea apache o nginx.
+
+## Cargar base de datos
+
+
+
+
 
 
