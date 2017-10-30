@@ -1,0 +1,14 @@
+// get
+
+http://wordpressdev.com/wp-json/hangar-api/v1/song?artistname=beethoven
+
+// POst
+http://wordpressdev.com/wp-json/hangar-api/v1/create?url=spotify.com&songname=Power&artistid=2&artistname=Hlelloween&albumid=3&albumname=TIme of the oath
+
+//delete
+http://wordpressdev.com/wp-json/hangar-api/v1/song?id=8815585
+
+
+//put
+
+http://wordpressdev.com/wp-json/hangar-api/v1/song?id=8815585&songname=Breaking the law&artistname=Judas Priest
