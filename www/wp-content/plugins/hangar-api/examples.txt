@@ -1,6 +1,6 @@
 // get
 
-http://wordpressdev.com/wp-json/hangar-api/v1/song?url=spotify.com&songname=NIB&artistid=2&artistname=Kreator&albumid=3&albumname=ni idea
+http://wordpressdev.com/wp-json/hangar-api/v1/song?songname=moon
 
 // Post
 http://wordpressdev.com/wp-json/hangar-api/v1/song?url=spotify.com&songname=NIB&artistid=2&albumid=3&albumname=ni idea
@@ -11,4 +11,4 @@ http://wordpressdev.com/wp-json/hangar-api/v1/song?id=8815585
 
 //put
 
-http://wordpressdev.com/wp-json/hangar-api/v1/song?id=8815585&songname=Breaking the law&artistname=Judas Priest
+http://wordpressdev.com/wp-json/hangar-api/v1/song?id=25479197&songname=Juanito
