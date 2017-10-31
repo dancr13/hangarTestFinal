@@ -70,6 +70,13 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 
   * **Código:** 404 NOT FOUND <br />
     **Contenido:** `[{"message": "Esa canción con ese Id no se encuentra","status": "warning"}]`
+    
+  * **Código:** 404 NOT FOUND <br />
+    **Contenido:** `  { "code": "rest_missing_callback_param", "message": "Missing parameter(s): id", "data": {
+        "status": 400,
+        "params": ["id"] }}`
+    
+  
 
 * **Ejemplos de llamadas:**
 
