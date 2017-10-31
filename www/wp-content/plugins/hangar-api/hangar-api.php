@@ -7,13 +7,30 @@
    License: GPL2
    */
 
+
+
+/**
+ *
+ *  Obtiene un arreglo json desde un archivo.
+ *
+ * @param  string  $songArtistName 
+ * @return  array
+ *
+ */
   function getJsonFromFile( ) {
     $pathFile = plugin_dir_path( __FILE__ ).'songs.json';
     $json = json_decode( file_get_contents( $pathFile ), true );
     return $json;	
   }
 
-
+/**
+ *
+ *  Obtiene una lista de canciones por nombre de canción.
+ *
+ * @param  string  $songArtistName 
+ * @return  array
+ *
+ */
   function getSongByName($songnametoseach)
   {
     $songsList= getJsonFromFile();
@@ -31,6 +48,14 @@
     return $result;
   }
 
+/**
+ *
+ *  Obtiene una lista de canciones por nombre de album.
+ *
+ * @param  string  $songArtistName 
+ * @return  array
+ *
+ */
   function getSongByAlbumName($songAlbumtoSeach)
   {
     $songsList= getJsonFromFile();
@@ -48,6 +73,14 @@
     return $result;
   }
 
+/**
+ *
+ *  Obtiene una lista de canciones por nombre de Artista.
+ *
+ * @param  string  $songArtistName
+ * @return  array
+ *
+ */
   function getSongByArtistName($songArtistName)
   {
     $songsList= getJsonFromFile();
@@ -65,8 +98,26 @@
     return $result;
   }
 
-  function joinResults($results)
+
+/**
+ *
+ *  Da formato a un arreglo de resultados  .
+ *
+ *  array['results']
+ *          $results['url']
+ *          $results['id']
+ *          $results['songname']
+ *          $results['artistid']
+ *          $results['artistname']
+ *          $results['albumid']
+ *          $results['albumname']
+ * @param   $results  (ver arriba)
+ * @return   array
+ *
+ */
+function joinResults($results)
   {
+
     $resultadoFinal= array();
     foreach($results as $result)
     {
