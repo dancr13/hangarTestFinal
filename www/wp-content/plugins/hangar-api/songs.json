@@ -1,1 +1,67 @@
-{"songs":[{"url":"plat","id":499095116,"songname":"dasdasassssss232","artistid":9958,"artistname":"Judas Priest2","albumid":9874,"albumname":"Grandes exitos"},{"url":"Not url","id":219458425,"songname":"putos todos","artistid":1823,"artistname":"lonnis","albumid":7321,"albumname":"Grandes exitos"},{"url":"Not url","id":417800118,"songname":"okmp","artistid":6021,"artistname":"Chente","albumid":7521,"albumname":"Grandes exitos"}]}
+{
+  "songs": [
+    {
+      "url": "spotify:album:3qfz9wig4gcrb4bimw9ov7",
+      "id": 25479197,
+      "songname": "johnny b. goode",
+      "artistid": 45,
+      "artistname": "chuck berry",
+      "albumid": 235469,
+      "albumname": "roll over beethoven"
+    },
+    {
+      "url": "spotify:track:7linrtr5px7i3r96mducjw",
+      "id": 8815585,
+      "songname": "moonlight sonata",
+      "artistid": 1833,
+      "artistname": "beethoven",
+      "albumid": 5619520,
+      "albumname": "beethoven piano sonatas"
+    },
+    {
+      "url": "spotify:track:7linrtr5px7i3r96mducjw",
+      "id": 8815585,
+      "songname": "twist and shout",
+      "artistid": 1833,
+      "artistname": "beatles",
+      "albumid": 5619520,
+      "albumname": "beatles"
+    },
+    {
+      "url": "spotify:track:7linrtr5px7i3r96mducjw",
+      "id": 8815585,
+      "songname": "i saw her standing there",
+      "artistid": 1833,
+      "artistname": "beatles",
+      "albumid": 5619520,
+      "albumname": "beatles"
+    },
+    {
+      "url": "spotify:track:7linrtr5px7i3r96mducjw",
+      "id": 8815585,
+      "songname": "here comes the sun",
+      "artistid": 1833,
+      "artistname": "beatles",
+      "albumid": 5619520,
+      "albumname": "beatles"
+    },
+    {
+      "url": "spotify:track:7linrtr5px7i3r96mducjw",
+      "id": 8815585,
+      "songname": "ain't she sweet",
+      "artistid": 1833,
+      "artistname": "beatles",
+      "albumid": 5619520,
+      "albumname": "beatles"
+    },
+    {
+      "url": "spotify:track:7linrtr5px7i3r96mducjw",
+      "id": 8815585,
+      "songname": "beatles reimagined",
+      "artistid": 1833,
+      "artistname": "beatles",
+      "albumid": 5619520,
+      "albumname": "beatles"
+    }
+  ]
+}

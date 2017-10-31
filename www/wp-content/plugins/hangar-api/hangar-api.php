@@ -97,14 +97,24 @@
   if( !isset( $parameters['songname'] ) &&  !isset( $parameters['artistname'] ) && !isset( $parameters['albumname']   ))
   {
     $results=getJsonFromFile();
+    $statusCode = 202;
   }
   else
   {
-
-    $results = array('songs'=>$results[0] );
+    if(count($results[0])==0)
+    {
+      $results = array('message'=>'No se encontro canciones con esos parametros', 'status'=>'error');
+      $statusCode = 404;
+    }
+    else
+    {
+      $results = array('songs'=>$results[0]);
+      $statusCode = 202;
+    }
+    
   }
   
-  $response = new WP_REST_Response( $results );
+  $response = new WP_REST_Response( $results, $statusCode );
   $response->header( 'Access-Control-Allow-Origin', apply_filters( 'giar_access_control_allow_origin','*' ) );
   return $response;
 
