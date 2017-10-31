@@ -98,6 +98,11 @@ function crearCancion() {
         success: function (res) {
             console.log(res);
             alert(res.message);
+        },
+        error: function (res) {
+            res = JSON.parse(res.responseText);
+            mensaje = res.message;
+            alert(mensaje);
         }
     });
 

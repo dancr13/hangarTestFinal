@@ -78,6 +78,19 @@
     return $resultadoFinal;
   }
  
+
+/**
+ *
+ * Consulta o obtiene canciones por parametros. .
+ *
+ *  array['parameters']
+ *          $parameters['songname']
+ *          $parameters['artistname']
+ *          $parameters['albumname']
+ * @param    $parameters  (ver arriba)
+ * @return   array
+ *
+ */
   function searchsong($request_data)
   {
     $results = array();
@@ -134,6 +147,23 @@
   return $response;
 
 }
+
+
+/**
+ *
+ * Actualiza una canción por id.
+ *
+ *  array['parameters']
+ *          $parameters['url']
+ *          $parameters['songname']
+ *          $parameters['artistid']
+ *          $parameters['artistname']
+ *          $parameters['albumid']
+ *          $parameters['albumname'] 
+ * @param    $parameters  (ver arriba)
+ * @return   array
+ *
+ */
 function updateSong($parameters)
 {
 
@@ -196,7 +226,16 @@ function updateSong($parameters)
 }
 
 
-
+/**
+ *
+ * Elimina una canción 
+ *
+ * $parameters
+ *     $parameters['id']
+ * @parameters    (ver arriba)
+ * @return   array
+ *
+ */
 function deleteSong($parameters)
 {
   $songId= (int)$parameters['id'];
@@ -250,6 +289,21 @@ function deleteSong($parameters)
   return $response;  
 }
 
+/**
+ *
+ * Crea una canción y guardar un canción.
+ *
+ *  array['parameters']
+ *          $parameters['url']
+ *          $parameters['songname']
+ *          $parameters['artistid']
+ *          $parameters['artistname']
+ *          $parameters['albumid']
+ *          $parameters['albumname'] 
+ * @param    $parameters  (ver arriba)
+ * @return   array
+ *
+ */
   function createSong($parameters)
   {
 
