@@ -23,7 +23,7 @@ Para este paso debe de configurar su servidor web ya sea apache o nginx.
 
 En el siguiente comando, edite el usuario que usa  para conectarse a mysql y ejecute lo siguiente:
 
-> mysqldump -u root -p  testhangar  > testhangar.sql
+> mysqldump -u root -p  testhangar  < testhangar.sql
 
 #### Accesos
 
@@ -70,8 +70,15 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 
   * **Código:** 404 NOT FOUND <br />
     **Contenido:** `[{"message": "Esa canción con ese Id no se encuentra","status": "warning"}]`
+    
+  * **Código:** 404 NOT FOUND <br />
+    **Contenido:** `  { "code": "rest_missing_callback_param", "message": "Missing parameter(s): id", "data": {
+        "status": 400,
+        "params": ["id"] }}`
+    
+  
 
-* **Ejemplos de llamdas:**
+* **Ejemplos de llamadas:**
 
   * **Post man**
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/delete.png)
@@ -138,8 +145,22 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 
   * **Código:** 404 NOT FOUND <br />
     **Contenido:** `{ "message": "Esa canción con ese Id no se encuentra","status": "error" }`
+    
+  * **Código:** 404 NOT FOUND <br />
+    **Contenido:** `{
+    "code": "rest_missing_callback_param",
+    "message": "Missing parameter(s): id",
+    "data": {
+        "status": 400,
+        "params": [
+            "id"
+        ]
+    }
+}`
+    
+    
 
-* **Ejemplos de llamdas:**
+* **Ejemplos de llamadas:**
 
   * **Post man**
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/put.png)
@@ -214,7 +235,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
   * **Código:** 404 NOT FOUND <br />
     **Contenido:** `{ "message": "No se encontro canciones con esos parametros","status": "error" }`
 
-* **Ejemplos de llamdas:**
+* **Ejemplos de llamadas:**
 
   * **Post man**
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/get.png)
@@ -236,8 +257,8 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
     });
 
    ```
-   
-   **Agregar  canción**
+
+**Agregar  canción**
 ----
   Agregar una nueva canción
   
@@ -267,6 +288,8 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    
    `albumname=[string]`
    
+   Al ser opcionales, se agregara información al azar en el contenido de la canción.
+   
 * **Respuesta exitosa:**
 
   * **Código:** 200 <br />
@@ -276,26 +299,39 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 
   * **Código:** 404 NOT FOUND <br />
     **Contenido:** `{ "message": "Problema al crear la canción.","status": "error" }`
+    
+  * **Código:** 404 NOT FOUND <br />
+    **Contenido:** ` {
+    "code": "rest_missing_callback_param",
+    "message": "Missing parameter(s): songname",
+    "data": {
+        "status": 400,
+        "params": [
+            "songname"
+        ]
+    }
+}` 
+   
 
-* **Ejemplos de llamdas:**
+* **Ejemplos de llamadas:**
 
   * **Post man**
-   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/put.png)
+   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/post.png)
   
   * **En jquery**
    ``` javascript
     jQuery.ajax({
-        url: "/wp-json/hangar-api/v1/song",
-        type: 'PUT',
-        dataType:"json",
-        data:   JSON.stringify(parameters),
-        contentType:"application/json;charset=utf-8;",
+        url: "/wp-json/hangar-api/v1/song?",
+        type: 'POST',
+        dataType: "json",
+        data: JSON.stringify(parameters),
+        contentType: "application/json;charset=utf-8;",
         success: function (res) {
+            console.log(res);
             alert(res.message);
         },
-        error: function(res)
-        {
-            res= JSON.parse(res.responseText);
+        error: function (res) {
+            res = JSON.parse(res.responseText);
             mensaje = res.message;
             alert(mensaje);
         }
