@@ -267,6 +267,8 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    
    `albumname=[string]`
    
+   Al ser opcionales, se agregara información al azar en el contenido de la canción.
+   
 * **Respuesta exitosa:**
 
   * **Código:** 200 <br />
