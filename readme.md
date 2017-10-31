@@ -280,22 +280,22 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 * **Ejemplos de llamdas:**
 
   * **Post man**
-   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/put.png)
+   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/post.png)
   
   * **En jquery**
    ``` javascript
     jQuery.ajax({
-        url: "/wp-json/hangar-api/v1/song",
-        type: 'PUT',
-        dataType:"json",
-        data:   JSON.stringify(parameters),
-        contentType:"application/json;charset=utf-8;",
+        url: "/wp-json/hangar-api/v1/song?",
+        type: 'POST',
+        dataType: "json",
+        data: JSON.stringify(parameters),
+        contentType: "application/json;charset=utf-8;",
         success: function (res) {
+            console.log(res);
             alert(res.message);
         },
-        error: function(res)
-        {
-            res= JSON.parse(res.responseText);
+        error: function (res) {
+            res = JSON.parse(res.responseText);
             mensaje = res.message;
             alert(mensaje);
         }
