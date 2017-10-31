@@ -299,6 +299,19 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 
   * **Código:** 404 NOT FOUND <br />
     **Contenido:** `{ "message": "Problema al crear la canción.","status": "error" }`
+    
+  * **Código:** 404 NOT FOUND <br />
+    **Contenido:** ` {
+    "code": "rest_missing_callback_param",
+    "message": "Missing parameter(s): songname",
+    "data": {
+        "status": 400,
+        "params": [
+            "songname"
+        ]
+    }
+}` 
+   
 
 * **Ejemplos de llamadas:**
 
