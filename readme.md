@@ -77,7 +77,8 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/delete.png)
   
   * **En jquery**
-   ``` jQuery.ajax({
+   ``` javascript
+   jQuery.ajax({
         url: "/wp-json/hangar-api/v1/song?id="+idCancion,
         type: 'DELETE',
         dataType:"json",
