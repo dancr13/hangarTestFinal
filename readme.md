@@ -117,10 +117,15 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    
    **Opcionales:**
    `url=[string]`
+   
    `songname=[string]`
+   
    `artistid=[integer]`
+   
    `artistname=[string]`
+   
    `albumid=[integer]`
+   
    `albumname=[string]`
    
 * **Respuesta exitosa:**
