@@ -71,7 +71,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
   * **Código:** 404 NOT FOUND <br />
     **Contenido:** `[{"message": "Esa canción con ese Id no se encuentra","status": "warning"}]`
 
-* **Ejemplos de llamdas:**
+* **Ejemplos de llamadas:**
 
   * **Post man**
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/delete.png)
@@ -139,7 +139,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
   * **Código:** 404 NOT FOUND <br />
     **Contenido:** `{ "message": "Esa canción con ese Id no se encuentra","status": "error" }`
 
-* **Ejemplos de llamdas:**
+* **Ejemplos de llamadas:**
 
   * **Post man**
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/put.png)
@@ -214,7 +214,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
   * **Código:** 404 NOT FOUND <br />
     **Contenido:** `{ "message": "No se encontro canciones con esos parametros","status": "error" }`
 
-* **Ejemplos de llamdas:**
+* **Ejemplos de llamadas:**
 
   * **Post man**
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/get.png)
@@ -277,7 +277,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
   * **Código:** 404 NOT FOUND <br />
     **Contenido:** `{ "message": "Problema al crear la canción.","status": "error" }`
 
-* **Ejemplos de llamdas:**
+* **Ejemplos de llamadas:**
 
   * **Post man**
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/post.png)
