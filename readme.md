@@ -116,6 +116,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    `id=[integer]`
    
    **Opcionales:**
+   
    `url=[string]`
    
    `songname=[string]`
