@@ -2,13 +2,13 @@
 <?php
 class WPHangarAPi
 {
-  public $url = 'spotify:album:3qfz9wig4gcrb4bimw9ov7';
+  public $url;
   public $id;
-  public $songName = 'No name';
+  public $songName;
   public $artistiD;
-  public $artistName = 'No  Artist name';
-  public $albumId ;
-  public $albumName = 'No  Album name';
+  public $artistName;
+  public $albumId;
+  public $albumName;
 
   public function __construct()
   {
@@ -16,17 +16,19 @@ class WPHangarAPi
   }
   /**
    *
-   * Busc una canción 
+   * Busca una canción 
    *
    * @return  array
    *
    */
   public function search()
   {
+
+
     $results = array();
     if (!isset($this->songName) && !isset($this->artistName) && !isset($this->albumName))
       {
-
+      //return $this->artistName;
       $results = $this->getSongList();
       $statusCode = 202;
 
@@ -34,7 +36,6 @@ class WPHangarAPi
       $response->header('Access-Control-Allow-Origin', apply_filters('giar_access_control_allow_origin', '*'));
       return $response;
     }
-
     if (isset($this->songName))
       {
       $resultByName = $this->getSongByName($this->songName);
@@ -186,7 +187,7 @@ class WPHangarAPi
     return $response;
   }
 
-   /**
+  /**
    *
    * Crea una canción 
    *
@@ -204,15 +205,15 @@ class WPHangarAPi
       'albumid' => $this->albumid,
       'albumname' => $this->albumName
     );
-  
+
     $currentsongs = $this->getSongList();
     $currentsongs = $currentsongs['songs'];
     array_push($currentsongs, $newSong);
-  
+
     $pathFile = $this->getDBPath();
     $currentsongs = array('songs' => $currentsongs);
     $currentsongs = json_encode($currentsongs);
-  
+
     if (file_put_contents($pathFile, $currentsongs))
       {
       $statusMessage = array('message' => 'Canción creada correctamente', "status" => "ok");
@@ -345,7 +346,7 @@ class WPHangarAPi
    */
   private function getDBPath()
   {
-   return plugin_dir_path(__FILE__) . 'songs.json';
+    return plugin_dir_path(__FILE__) . 'songs.json';
   }
 
   /**

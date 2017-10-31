@@ -121,6 +121,27 @@ add_action('rest_api_init', function () {
     ),
   ));
 });
+/**
+ *
+ * Consulta o obtiene canciones por parametros. .
+ *
+ *  array['parameters']
+ *          $parameters['songname']
+ *          $parameters['artistname']
+ *          $parameters['albumname']
+ * @param    $parameters  (ver arriba)
+ * @return   array
+ *
+ */
+ function searchsong($request_data)
+ {
+   $parameters = $request_data->get_params();
+   $hangarSongApi = new WPHangarAPi();
+   $hangarSongApi->songName = isset($parameters['songname']) ? $parameters['songname'] : null;
+   $hangarSongApi->artistName = isset($parameters['artistname']) ? $parameters['artistname'] : null;
+   $hangarSongApi->albumName = isset($parameters['albumname']) ? $parameters['albumname'] : null;
+   return $hangarSongApi->search();
+ }
 
 /**
  *
@@ -152,30 +173,7 @@ function updateSong($parameters)
   return  $hangarApi->update();
 }
 
-/**
- *
- * Consulta o obtiene canciones por parametros. .
- *
- *  array['parameters']
- *          $parameters['songname']
- *          $parameters['artistname']
- *          $parameters['albumname']
- * @param    $parameters  (ver arriba)
- * @return   array
- *
- */
-function searchsong($request_data)
-{
-  $results = array();
-  $parameters = $request_data->get_params();
 
-  $hangarApi = new WPHangarAPi();
-  $hangarApi->songname = isset($parameters['songname']) ? $parameters['songname'] : null;
-  $hangarApi->artistname = isset($parameters['artistname']) ? $parameters['artistname'] : null;
-  $hangarApi->albumname = isset($parameters['albumname']) ? $parameters['albumname'] : null;
-
-  return ($hangarApi->search());
-}
 /**
  *
  * Elimina una canción 
@@ -212,12 +210,12 @@ function deleteSong($parameters)
 function createSong($parameters)
 {
   $hangarApi = new WPHangarAPi();
-  $hangarApi->url = isset($parameters['url']) ? $parameters['url'] : $hangarApi->url;
-  $hangarApi->songName = isset($parameters['songname']) ? $parameters['songname'] : $hangarApi->songName;
-  $hangarApi->artistiD = isset($parameters['artistid']) ? $parameters['artistid'] : $hangarApi->artistiD;
-  $hangarApi->artistName = isset($parameters['artistname']) ? $parameters['artistname'] : $hangarApi->artistName ;
-  $hangarApi->albumId = isset($parameters['albumid']) ? $parameters['albumid'] : $hangarApi->albumId ;
-  $hangarApi->albumName = isset($parameters['albumname']) ? $parameters['albumname'] : $hangarApi->albumName ;
+  $hangarApi->url = isset($parameters['url']) ? $parameters['url'] : 'spotify:album:3qfz9wig4gcrb4bimw9ov7';
+  $hangarApi->songName = isset($parameters['songname']) ? $parameters['songname'] : 'No name';
+  $hangarApi->artistiD = isset($parameters['artistid']) ? $parameters['artistid'] : rand(100, 1000000000);
+  $hangarApi->artistName = isset($parameters['artistname']) ? $parameters['artistname'] : 'No  Artist name';
+  $hangarApi->albumId = isset($parameters['albumid']) ? $parameters['albumid'] : rand(100, 1000000000) ;
+  $hangarApi->albumName = isset($parameters['albumname']) ? $parameters['albumname'] : 'No  Album name' ;
  
   return  $hangarApi->create();
 }
