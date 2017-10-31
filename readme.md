@@ -99,15 +99,15 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 
 **Actualizar canción**
 ----
-  Elimina una o varias canciones
+  Actualiza una canción por un indentificador
   
 * **URL**
 
-  /wp-json/hangar-api/v1/song?id=
+  /wp-json/hangar-api/v1/song
 
 * **Métodos:**
 
-  `DELETE`
+  `PUT`
   
 *  **URL Params**
 
@@ -115,44 +115,48 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
  
    `id=[integer]`
    
-* **Data Params**
-
-  None
-
+   **Opcionales:**
+   `url=[string]`
+   `songname=[string]`
+   `artistid=[integer]`
+   `artistname=[string]`
+   `albumid=[integer]`
+   `albumname=[string]`
+   
 * **Respuesta exitosa:**
 
   * **código:** 200 <br />
-    **Content:** `[{"message": "canción borrada", "status": "ok"}]`
+    **Content:** `{"message": "Canción actualizada", "status": "ok"}`
  
 * **Respuesta erronea:**
 
   * **Code:** 404 NOT FOUND <br />
-    **Cóntent:** `[{"message": "Esa canción con ese Id no se encuentra","status": "warning"}]`
+    **Cóntent:** `{ "message": "Esa canción con ese Id no se encuentra","status": "error" }`
 
 * **Ejemplos de llamdas:**
 
   * **Post man**
-   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/delete.png)
+   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/put.png)
   
   * **En jquery**
    ``` javascript
-   jQuery.ajax({
-        url: "/wp-json/hangar-api/v1/song?id="+idCancion,
-        type: 'DELETE',
+    jQuery.ajax({
+        url: "/wp-json/hangar-api/v1/song",
+        type: 'PUT',
         dataType:"json",
+        data:   JSON.stringify(parameters),
         contentType:"application/json;charset=utf-8;",
         success: function (res) {
-            mensaje= JSON.parse(res.responseText);
-            mensaje = mensaje[0].message;
-            alert(mensaje);
+            alert(res.message);
         },
         error: function(res)
         {
-            mensaje= JSON.parse(res.responseText);
-            mensaje = mensaje[0].message;
+            res= JSON.parse(res.responseText);
+            mensaje = res.message;
             alert(mensaje);
         }
     });
+
    ```
 
 
