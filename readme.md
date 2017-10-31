@@ -73,10 +73,10 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 
 * **Ejemplos de llamdas:**
 
-  **Post man**
+ * **Post man**
   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/delete.png)
   
-**En jquery**
+ * **En jquery**
   ```javascript
     jQuery.ajax({
         url: "http://wordpressdev.com/wp-json/hangar-api/v1/song?id=968846920",
