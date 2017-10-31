@@ -79,7 +79,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
   * **En jquery**
    ```javascript
      jQuery.ajax({
-         url: "http://wordpressdev.com/wp-json/hangar-api/v1/song?id=968846920",
+         url: "/wp-json/hangar-api/v1/song?id=968846920",
          type: 'DELETE',
          dataType:"json",
          contentType:"application/json;charset=utf-8;",
