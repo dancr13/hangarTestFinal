@@ -164,6 +164,79 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
     });
 
    ```
+   
+**Buscar canción**
+----
+  Busca y lista una(s) canción(es)
+  
+* **URL**
+
+  /wp-json/hangar-api/v1/son
+
+* **Métodos:**
+
+  `GET`
+  
+*  **URL Params**
+
+   **Requerdo:**
+ 
+   `Ninguno`
+   
+   **Opcionales:**
+   
+   `songname=[string]`
+   
+   `artistname=[string]`
+   
+   `albumname=[integer]`
+   
+   
+* **Respuesta exitosa:**
+
+  * **Código:** 200 <br />
+    **Contenido:** `{
+    "songs": [
+        {
+            "url": "plat",
+            "id": 499095116,
+            "songname": "Painkiller",
+            "artistid": 9958,
+            "artistname": "Judas Priest2",
+            "albumid": 9874,
+            "albumname": "Grandes exitos"
+        }
+    ]
+}`
+ 
+* **Respuesta erronea:**
+
+  * **Código:** 404 NOT FOUND <br />
+    **Contenido:** `{ "message": "No se encontro canciones con esos parametros","status": "error" }`
+
+* **Ejemplos de llamdas:**
+
+  * **Post man**
+   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/get.png)
+  
+  * **En jquery**
+   ``` javascript
+    jQuery.ajax({
+        url: "/wp-json/hangar-api/v1/song",
+        type: 'GET',
+        data: parameters,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8;",
+        success: function (res) {
+          
+        },
+        error: function (res) {
+
+        }
+    });
+
+   ```
+
 
 
 
