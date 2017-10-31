@@ -236,8 +236,8 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
     });
 
    ```
-   
-   **Agregar  canción**
+
+**Agregar  canción**
 ----
   Agregar una nueva canción
   
