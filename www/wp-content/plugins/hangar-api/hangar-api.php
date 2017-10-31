@@ -64,43 +64,60 @@
     }
     return $result;
   }
- 
 
+  function joinResults($results)
+  {
+    $resultadoFinal= array();
+    foreach($results as $result)
+    {
+      foreach($result as $song)
+      {
+        array_push($resultadoFinal, $song);
+      }
+    }
+    return $resultadoFinal;
+  }
+ 
   function searchsong($request_data)
   {
     $results = array();
     $parameters = $request_data->get_params();
 
+  if( !isset( $parameters['songname'] ) &&  !isset( $parameters['artistname'] ) && !isset( $parameters['albumname']   ))
+  {
+    $results=getJsonFromFile();
+    $statusCode = 202;
+
+    $response = new WP_REST_Response( $results, $statusCode );
+    $response->header( 'Access-Control-Allow-Origin', apply_filters( 'giar_access_control_allow_origin','*' ) );
+    return $response;
+  
+  }
 
   if( isset( $parameters['songname'] ) )
   {
     $songName= $parameters['songname']; 
     $resultByName = getSongByName($songName);
     array_push($results, $resultByName);
-   // $results =$resultByName;
+//    return $results[0];
   }
   if( isset( $parameters['artistname'] ))
   {
     $artistName= $parameters['artistname']; 
     $resultByArtistName = getSongByArtistName($artistName);
     array_push($results, $resultByArtistName);
+  
+
   }
   if( isset( $parameters['albumname'] ))
   {
-
     $albumname = $parameters['albumname'];
     $resultByAlbumName = getSongByAlbumName($albumname);
     array_push($results, $resultByAlbumName);
   }
+    
+  $resultadoFinal= joinResults($results);
 
-
-  if( !isset( $parameters['songname'] ) &&  !isset( $parameters['artistname'] ) && !isset( $parameters['albumname']   ))
-  {
-    $results=getJsonFromFile();
-    $statusCode = 202;
-  }
-  else
-  {
     if(count($results[0])==0)
     {
       $results = array('message'=>'No se encontro canciones con esos parametros', 'status'=>'error');
@@ -108,12 +125,10 @@
     }
     else
     {
-      $results = array('songs'=>$results[0]);
+      $results = array('songs'=>$resultadoFinal);
       $statusCode = 202;
     }
-    
-  }
-  
+
   $response = new WP_REST_Response( $results, $statusCode );
   $response->header( 'Access-Control-Allow-Origin', apply_filters( 'giar_access_control_allow_origin','*' ) );
   return $response;
