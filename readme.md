@@ -39,7 +39,7 @@ En el siguiente comando, edite el usuario que usa  para conectarse a mysql y eje
 
 Lo siguiente explica cada operación permitida, los parametros aceptados y la respuesta en cada uno.
 
-**Eliminarr canción**
+**Eliminar canción**
 ----
   Elimina una o varias canciones
   
@@ -47,13 +47,71 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 
   /wp-json/hangar-api/v1/song?id=
 
-* **Method:**
+* **Métodos:**
 
   `DELETE`
   
 *  **URL Params**
 
-   **Required:**
+   **Requerdo:**
+ 
+   `id=[integer]`
+   
+* **Data Params**
+
+  None
+
+* **Respuesta exitosa:**
+
+  * **código:** 200 <br />
+    **Content:** `[{"message": "canción borrada", "status": "ok"}]`
+ 
+* **Respuesta erronea:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Cóntent:** `[{"message": "Esa canción con ese Id no se encuentra","status": "warning"}]`
+
+* **Ejemplos de llamdas:**
+
+  * **Post man**
+   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/delete.png)
+  
+  * **En jquery**
+   ``` javascript
+   jQuery.ajax({
+        url: "/wp-json/hangar-api/v1/song?id="+idCancion,
+        type: 'DELETE',
+        dataType:"json",
+        contentType:"application/json;charset=utf-8;",
+        success: function (res) {
+            mensaje= JSON.parse(res.responseText);
+            mensaje = mensaje[0].message;
+            alert(mensaje);
+        },
+        error: function(res)
+        {
+            mensaje= JSON.parse(res.responseText);
+            mensaje = mensaje[0].message;
+            alert(mensaje);
+        }
+    });
+   ```
+
+**Actualizar canción**
+----
+  Elimina una o varias canciones
+  
+* **URL**
+
+  /wp-json/hangar-api/v1/song?id=
+
+* **Métodos:**
+
+  `DELETE`
+  
+*  **URL Params**
+
+   **Requerdo:**
  
    `id=[integer]`
    
