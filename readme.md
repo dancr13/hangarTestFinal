@@ -64,12 +64,12 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 * **Respuesta exitosa:**
 
   * **código:** 200 <br />
-    **Content:** `[{"message": "canción borrada", "status": "ok"},200]`
+    **Content:** `[{"message": "canción borrada", "status": "ok"}]`
  
 * **Respuesta erronea:**
 
   * **Code:** 404 NOT FOUND <br />
-    **Cóntent:** `[{"message": "Esa canción con ese Id no se encuentra","status": "warning"},400]`
+    **Cóntent:** `[{"message": "Esa canción con ese Id no se encuentra","status": "warning"}]`
 
 * **Ejemplos de llamdas:**
 
