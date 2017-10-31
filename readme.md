@@ -61,28 +61,35 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
 
   None
 
-* **Success Response:**
+* **Respuesta exitosa:**
 
-  * **Code:** 200 <br />
+  * **código:** 200 <br />
     **Content:** `[{"message": "canción borrada", "status": "ok"},200]`
  
-* **Error Response:**
+* **Respuesta erronea:**
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `[{"message": "Esa canción con ese Id no se encuentra","status": "warning"},400]`
+    **Cóntent:** `[{"message": "Esa canción con ese Id no se encuentra","status": "warning"},400]`
 
-* **Sample Call:**
+* **Ejemplos de llamdas:**
 
+  **Post man**
+  ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/delete.png)
+  
+**En jquery**
   ```javascript
-    $.ajax({
-      url: "/users/1",
-      dataType: "json",
-      type : "GET",
-      success : function(r) {
-        console.log(r);
-      }
+    jQuery.ajax({
+        url: "http://wordpressdev.com/wp-json/hangar-api/v1/song?id=968846920",
+        type: 'DELETE',
+        dataType:"json",
+        contentType:"application/json;charset=utf-8;",
+        success: function (res) {
+                alert(res.message);
+        }
     });
   ```
+
+
 
 
 
