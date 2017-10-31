@@ -77,16 +77,19 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/delete.png)
   
   * **En jquery**
-   ```javascript
-     jQuery.ajax({
-         url: "/wp-json/hangar-api/v1/song?id=968846920",
-         type: 'DELETE',
-         dataType:"json",
-         contentType:"application/json;charset=utf-8;",
-         success: function (res) {
-                 alert(res.message);
-         }
-     });
+   ``` jQuery.ajax({
+        url: "/wp-json/hangar-api/v1/song?id="+idCancion,
+        type: 'DELETE',
+        dataType:"json",
+        contentType:"application/json;charset=utf-8;",
+        success: function (res) {
+                alert(res[0].message);
+        },
+        error: function(res)
+        {
+            alert(res[0].message);
+        }
+    });
    ```
 
 
