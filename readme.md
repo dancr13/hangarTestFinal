@@ -39,7 +39,50 @@ En el siguiente comando, edite el usuario que usa  para conectarse a mysql y eje
 
 Lo siguiente explica cada operación permitida, los parametros aceptados y la respuesta en cada uno.
 
+**Eliminr canción**
+----
+  Elimina una o varias canciones
+  
+* **URL**
 
+  /wp-json/hangar-api/v1/song?id=
+
+* **Method:**
+
+  `DELETE`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   `id=[integer]`
+   
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `[{"message": "canción borrada", "status": "ok"},200]`
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `[{"message": "Esa canción con ese Id no se encuentra","status": "warning"},400]`
+
+* **Sample Call:**
+
+  ```javascript
+    $.ajax({
+      url: "/users/1",
+      dataType: "json",
+      type : "GET",
+      success : function(r) {
+        console.log(r);
+      }
+    });
+  ```
 
 
 
