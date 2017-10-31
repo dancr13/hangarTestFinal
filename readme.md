@@ -39,7 +39,7 @@ En el siguiente comando, edite el usuario que usa  para conectarse a mysql y eje
 
 Lo siguiente explica cada operación permitida, los parametros aceptados y la respuesta en cada uno.
 
-**Eliminr canción**
+**Eliminarr canción**
 ----
   Elimina una o varias canciones
   
