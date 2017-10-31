@@ -178,11 +178,6 @@ function updateSong($parameters)
 
 function deleteSong($parameters)
 {
-  if(!isset($parameters['id']) || empty($parameters['id']) )
-  {
-    return array('message'=>'El id es requerido', 'status'=> 'error' );
-    
-  }
   $songId= (int)$parameters['id'];
   $songsList= getJsonFromFile();
   $pathFile = plugin_dir_path( __FILE__ ).'songs.json';
@@ -210,17 +205,25 @@ function deleteSong($parameters)
 
   if($counterAppearances == 0)
   {
-    $update_success = array('message'=> 'Esa canción con ese Id no se encuentra.', 'status'=> 'warning');
+    $response = array(
+      array('message'=> 'Esa canción con ese Id no se encuentra', 'status'=> 'warning'),
+      400
+    );
+  
   }
   else
   {
     if(!file_put_contents($pathFile, $newListSong));
     {
-      $update_success = array('message'=> 'canción borrada', 'status'=> 'ok');
+      
+      $response = array(
+        array('message'=> 'canción borrada', 'status'=> 'ok'),
+        200
+      );
     }
   }
       
-  $response = new WP_REST_Response( $update_success );
+  $response = new WP_REST_Response( $response );
   $response->header( 'Access-Control-Allow-Origin', apply_filters( 'giar_access_control_allow_origin', '*' ) );
   return $response;  
 }
