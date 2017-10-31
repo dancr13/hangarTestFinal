@@ -111,26 +111,20 @@
 }
 function updateSong($parameters)
 {
-  if(!isset($parameters['id']) || empty($parameters['id']) )
-  {
-    return array('message'=>'El id es requerido' , 'status'=> 'error' );
-
-  }
 
   $songId= (int)$parameters['id'];
   $songsList= getJsonFromFile();
   $pathFile = plugin_dir_path( __FILE__ ).'songs.json';
   $results= array();
   $update_success =false;
-  $counterAppearances = 0;
-
+  $idFound  = false;
   foreach($songsList as $song)
   {
     foreach($song  as $data)
     {
          if($data['id'] == $songId )
          {
-
+          $idFound = true;
           $url = isset($parameters['url']) ? $parameters['url'] : $data['url'];
           $songName = isset($parameters['songname']) ? $parameters['songname'] : $data['songname'];
           $artistID = isset($parameters['artistid']) ? $parameters['artistid'] : $data['artistid'];
@@ -145,11 +139,11 @@ function updateSong($parameters)
           $data['albumid'] = $albumid;
           $data['albumname'] = $albumname;
           array_push($results, $data);
+
          }
          else
          {
           array_push($results, $data);
-          $counterAppearances++;
          }
     }
   }
@@ -157,19 +151,21 @@ function updateSong($parameters)
   $newListSong = json_encode($newListSong);
 
 
-  if($counterAppearances == 0)
+  if(!$idFound)
   {
-    $update_success = array('message'=> 'Esa canción con ese Id no se encuentra.', 'status'=> 'warning');
+    $response = array('message'=> 'Esa canción con ese Id no se encuentra', 'status'=> 'error');
+    $codeResponse = 404;
   }
   else
   {
     if(!file_put_contents($pathFile, $newListSong));
     {
-      $update_success = array('message'=> 'canción actualizada', 'status'=> 'ok');
+      $response = array('message'=> 'Canción actualizada', 'status'=> 'ok');
+      $codeResponse = 200;
     }
   }
       
-  $response = new WP_REST_Response( $update_success );
+  $response = new WP_REST_Response( $response, $codeResponse );
   $response->header( 'Access-Control-Allow-Origin', apply_filters( 'giar_access_control_allow_origin', '*' ) );
   return $response;  
 }
@@ -206,10 +202,10 @@ function deleteSong($parameters)
   if($counterAppearances == 0)
   {
     $response = array(
-      array('message'=> 'Esa canción con ese Id no se encuentra', 'status'=> 'warning'),
-      400
+      array('message'=> 'Esa canción con ese Id no se encuentra', 'status'=> 'error'),
+      
     );
-  
+    $codeResponse = 404;
   }
   else
   {
@@ -218,12 +214,13 @@ function deleteSong($parameters)
       
       $response = array(
         array('message'=> 'canción borrada', 'status'=> 'ok'),
-        200
       );
+      $codeResponse = 200;
+      
     }
   }
       
-  $response = new WP_REST_Response( $response );
+  $response = new WP_REST_Response( $response , $codeResponse );
   $response->header( 'Access-Control-Allow-Origin', apply_filters( 'giar_access_control_allow_origin', '*' ) );
   return $response;  
 }
@@ -360,7 +357,7 @@ function deleteSong($parameters)
         ),
 
         'songname' => array(
-          'required'=> true,
+          'required'=> false,
           'type'        => 'string',
           'description' => __( 'Nombre de la canción.' ),
         ),

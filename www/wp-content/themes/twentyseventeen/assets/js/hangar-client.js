@@ -170,14 +170,19 @@ function actualizarCancion()
     }
 
     jQuery.ajax({
-        url: "http://wordpressdev.com/wp-json/hangar-api/v1/song",
+        url: "/wp-json/hangar-api/v1/song",
         type: 'PUT',
         dataType:"json",
         data:   JSON.stringify(parameters),
         contentType:"application/json;charset=utf-8;",
         success: function (res) {
-                console.log(res);
-                alert(res.message);
+            alert(res.message);
+        },
+        error: function(res)
+        {
+            res= JSON.parse(res.responseText);
+            mensaje = res.message;
+            alert(mensaje);
         }
     });
 
@@ -185,7 +190,7 @@ function actualizarCancion()
 
 function borrarCancion()
 {
-    var idCancion, parameters;
+    var idCancion, parameters, mensaje;
     idCancion = jQuery('#id-cancion').val();
     parameters = {};
 
@@ -197,13 +202,20 @@ function borrarCancion()
     }
 
     jQuery.ajax({
-        url: "http://wordpressdev.com/wp-json/hangar-api/v1/song?id="+idCancion,
+        url: "/wp-json/hangar-api/v1/song?id="+idCancion,
         type: 'DELETE',
         dataType:"json",
         contentType:"application/json;charset=utf-8;",
         success: function (res) {
-                    console.log(res);
-                alert(res.message);
+            mensaje= JSON.parse(res.responseText);
+            mensaje = mensaje[0].message;
+            alert(mensaje);
+        },
+        error: function(res)
+        {
+            mensaje= JSON.parse(res.responseText);
+            mensaje = mensaje[0].message;
+            alert(mensaje);
         }
     });
     
