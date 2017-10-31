@@ -236,6 +236,72 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
     });
 
    ```
+   
+   **Agregar  canción**
+----
+  Agregar una nueva canción
+  
+* **URL**
+
+  /wp-json/hangar-api/v1/song
+
+* **Métodos:**
+
+  `POST`
+  
+*  **URL Params**
+
+   **Requerdo:**
+ 
+ `songname=[string]`
+   
+   **Opcionales:**
+   
+   `url=[string]`
+   
+   `artistid=[integer]`
+   
+   `artistname=[string]`
+   
+   `albumid=[integer]`
+   
+   `albumname=[string]`
+   
+* **Respuesta exitosa:**
+
+  * **Código:** 200 <br />
+    **Contenido:** `{"message": "Canción creada correctamente'", "status": "ok"}`
+ 
+* **Respuesta erronea:**
+
+  * **Código:** 404 NOT FOUND <br />
+    **Contenido:** `{ "message": "Problema al crear la canción.","status": "error" }`
+
+* **Ejemplos de llamdas:**
+
+  * **Post man**
+   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/put.png)
+  
+  * **En jquery**
+   ``` javascript
+    jQuery.ajax({
+        url: "/wp-json/hangar-api/v1/song",
+        type: 'PUT',
+        dataType:"json",
+        data:   JSON.stringify(parameters),
+        contentType:"application/json;charset=utf-8;",
+        success: function (res) {
+            alert(res.message);
+        },
+        error: function(res)
+        {
+            res= JSON.parse(res.responseText);
+            mensaje = res.message;
+            alert(mensaje);
+        }
+    });
+
+   ```
 
 
 
