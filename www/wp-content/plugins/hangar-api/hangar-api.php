@@ -7,407 +7,10 @@
    License: GPL2
  */
 
+include ('WPHangarApi.php');
 
 
-/**
- *
- *  Obtiene un arreglo json desde un archivo.
- *
- * @param  string  $songArtistName 
- * @return  array
- *
- */
-function getJsonFromFile()
-{
-  $pathFile = plugin_dir_path(__FILE__) . 'songs.json';
-  $json = json_decode(file_get_contents($pathFile), true);
-  return $json;
-}
-
-/**
- *
- *  Obtiene una lista de canciones por nombre de canción.
- *
- * @param  string  $songArtistName 
- * @return  array
- *
- */
-function getSongByName($songnametoseach)
-{
-  $songsList = getJsonFromFile();
-  $result = array();
-  foreach ($songsList as $song)
-    {
-    foreach ($song as $data)
-      {
-      if (strpos($data['songname'], $songnametoseach) !== false)
-        {
-        array_push($result, $data);
-      }
-    }
-  }
-  return $result;
-}
-
-/**
- *
- *  Obtiene una lista de canciones por nombre de album.
- *
- * @param  string  $songArtistName 
- * @return  array
- *
- */
-function getSongByAlbumName($songAlbumtoSeach)
-{
-  $songsList = getJsonFromFile();
-  $result = array();
-  foreach ($songsList as $song)
-    {
-    foreach ($song as $data)
-      {
-      if (strpos($data['albumname'], $songAlbumtoSeach) !== false)
-        {
-        array_push($result, $data);
-      }
-    }
-  }
-  return $result;
-}
-
-/**
- *
- *  Obtiene una lista de canciones por nombre de Artista.
- *
- * @param  string  $songArtistName
- * @return  array
- *
- */
-function getSongByArtistName($songArtistName)
-{
-  $songsList = getJsonFromFile();
-  $result = array();
-  foreach ($songsList as $song)
-    {
-    foreach ($song as $data)
-      {
-      if (strpos($data['artistname'], $songArtistName) !== false)
-        {
-        array_push($result, $data);
-      }
-    }
-  }
-  return $result;
-}
-
-
-/**
- *
- *  Da formato a un arreglo de resultados  .
- *
- *  array['results']
- *          $results['url']
- *          $results['id']
- *          $results['songname']
- *          $results['artistid']
- *          $results['artistname']
- *          $results['albumid']
- *          $results['albumname']
- * @param   $results  (ver arriba)
- * @return   array
- *
- */
-function joinResults($results)
-{
-
-  $resultadoFinal = array();
-  foreach ($results as $result)
-    {
-    foreach ($result as $song)
-      {
-      array_push($resultadoFinal, $song);
-    }
-  }
-  return $resultadoFinal;
-}
-
-
-/**
- *
- * Consulta o obtiene canciones por parametros. .
- *
- *  array['parameters']
- *          $parameters['songname']
- *          $parameters['artistname']
- *          $parameters['albumname']
- * @param    $parameters  (ver arriba)
- * @return   array
- *
- */
-function searchsong($request_data)
-{
-  $results = array();
-  $parameters = $request_data->get_params();
-
-  if (!isset($parameters['songname']) && !isset($parameters['artistname']) && !isset($parameters['albumname']))
-    {
-    $results = getJsonFromFile();
-    $statusCode = 202;
-
-    $response = new WP_REST_Response($results, $statusCode);
-    $response->header('Access-Control-Allow-Origin', apply_filters('giar_access_control_allow_origin', '*'));
-    return $response;
-
-  }
-
-  if (isset($parameters['songname']))
-    {
-    $songName = $parameters['songname'];
-    $resultByName = getSongByName($songName);
-    array_push($results, $resultByName);
-//    return $results[0];
-
-  }
-  if (isset($parameters['artistname']))
-    {
-    $artistName = $parameters['artistname'];
-    $resultByArtistName = getSongByArtistName($artistName);
-    array_push($results, $resultByArtistName);
-
-
-  }
-  if (isset($parameters['albumname']))
-    {
-    $albumname = $parameters['albumname'];
-    $resultByAlbumName = getSongByAlbumName($albumname);
-    array_push($results, $resultByAlbumName);
-  }
-
-  $resultadoFinal = joinResults($results);
-
-  if (count($results[0]) == 0)
-    {
-    $results = array('message' => 'No se encontro canciones con esos parametros', 'status' => 'error');
-    $statusCode = 404;
-  }
-  else
-    {
-    $results = array('songs' => $resultadoFinal);
-    $statusCode = 202;
-  }
-
-  $response = new WP_REST_Response($results, $statusCode);
-  $response->header('Access-Control-Allow-Origin', apply_filters('giar_access_control_allow_origin', '*'));
-  return $response;
-
-}
-
-
-/**
- *
- * Actualiza una canción por id.
- *
- *  array['parameters']
- *          $parameters['url']
- *          $parameters['songname']
- *          $parameters['artistid']
- *          $parameters['artistname']
- *          $parameters['albumid']
- *          $parameters['albumname'] 
- * @param    $parameters  (ver arriba)
- * @return   array
- *
- */
-function updateSong($parameters)
-{
-
-  $songId = (int)$parameters['id'];
-  $songsList = getJsonFromFile();
-  $pathFile = plugin_dir_path(__FILE__) . 'songs.json';
-  $results = array();
-  $update_success = false;
-  $idFound = false;
-  foreach ($songsList as $song)
-    {
-    foreach ($song as $data)
-      {
-      if ($data['id'] == $songId)
-        {
-        $idFound = true;
-        $url = isset($parameters['url']) ? $parameters['url'] : $data['url'];
-        $songName = isset($parameters['songname']) ? $parameters['songname'] : $data['songname'];
-        $artistID = isset($parameters['artistid']) ? $parameters['artistid'] : $data['artistid'];
-        $artistname = isset($parameters['artistname']) ? $parameters['artistname'] : $data['artistname'];
-        $albumid = isset($parameters['albumid']) ? $parameters['albumid'] : $data['albumid'];
-        $albumname = isset($parameters['albumname']) ? $parameters['albumname'] : $data['albumname'];
-
-        $data['url'] = $url;
-        $data['songname'] = $songName;
-        $data['artistid'] = $artistID;
-        $data['artistname'] = $artistname;
-        $data['albumid'] = $albumid;
-        $data['albumname'] = $albumname;
-        array_push($results, $data);
-
-      }
-      else
-        {
-        array_push($results, $data);
-      }
-    }
-  }
-  $newListSong = array('songs' => $results);
-  $newListSong = json_encode($newListSong);
-
-
-  if (!$idFound)
-    {
-    $response = array('message' => 'Esa canción con ese Id no se encuentra', 'status' => 'error');
-    $codeResponse = 404;
-  }
-  else
-    {
-    if (!file_put_contents($pathFile, $newListSong));
-    {
-      $response = array('message' => 'Canción actualizada', 'status' => 'ok');
-      $codeResponse = 200;
-    }
-  }
-
-  $response = new WP_REST_Response($response, $codeResponse);
-  $response->header('Access-Control-Allow-Origin', apply_filters('giar_access_control_allow_origin', '*'));
-  return $response;
-}
-
-
-/**
- *
- * Elimina una canción 
- *
- * $parameters
- *     $parameters['id']
- * @parameters    (ver arriba)
- * @return   array
- *
- */
-function deleteSong($parameters)
-{
-  $songId = (int)$parameters['id'];
-  $songsList = getJsonFromFile();
-  $pathFile = plugin_dir_path(__FILE__) . 'songs.json';
-  $results = array();
-  $update_success = false;
-  $counterAppearances = 0;
-
-  foreach ($songsList as $song)
-    {
-    foreach ($song as $data)
-      {
-      if ($data['id'] !== $songId)
-        {
-        array_push($results, $data);
-      }
-      else
-        {
-        $counterAppearances++;
-      }
-    }
-  }
-  $newListSong = array('songs' => $results);
-  $newListSong = json_encode($newListSong);
-
-  if ($counterAppearances == 0)
-    {
-    $response = array(
-      array('message' => 'Esa canción con ese Id no se encuentra', 'status' => 'error'),
-
-    );
-    $codeResponse = 404;
-  }
-  else
-    {
-    if (!file_put_contents($pathFile, $newListSong));
-    {
-
-      $response = array(
-        array('message' => 'canción borrada', 'status' => 'ok'),
-      );
-      $codeResponse = 200;
-
-    }
-  }
-
-  $response = new WP_REST_Response($response, $codeResponse);
-  $response->header('Access-Control-Allow-Origin', apply_filters('giar_access_control_allow_origin', '*'));
-  return $response;
-}
-
-/**
- *
- * Crea una canción y guardar un canción.
- *
- *  array['parameters']
- *          $parameters['url']
- *          $parameters['songname']
- *          $parameters['artistid']
- *          $parameters['artistname']
- *          $parameters['albumid']
- *          $parameters['albumname'] 
- * @param    $parameters  (ver arriba)
- * @return   array
- *
- */
-function createSong($parameters)
-{
-
-  $update_success = array('message' => 'Error al crear la canción.');
-  $url = isset($parameters['url']) ? $parameters['url'] : "Not url";
-  $songName = isset($parameters['songname']) ? $parameters['songname'] : "Los pollitos :( ";
-  $artistID = isset($parameters['artistid']) ? $parameters['artistid'] : rand(100, 10000);
-  $artistname = isset($parameters['artistname']) ? $parameters['artistname'] : 'Chente';
-  $albumid = isset($parameters['albumid']) ? $parameters['albumid'] : rand(100, 10000);
-  $albumname = isset($parameters['albumname']) ? $parameters['albumname'] : 'Grandes exitos';
-
-  $newSong = array(
-    'url' => $url,
-    'id' => rand(100, 1000000000),
-    'songname' => $songName,
-    'artistid' => $artistID,
-    'artistname' => $artistname,
-    'albumid' => $albumid,
-    'albumname' => $albumname
-  );
-
-  $currentsongs = getJsonFromFile();
-  $currentsongs = $currentsongs['songs'];
-  array_push($currentsongs, $newSong);
-
-  $pathFile = plugin_dir_path(__FILE__) . 'songs.json';
-  $currentsongs = array('songs' => $currentsongs);
-  $currentsongs = json_encode($currentsongs);
-
-  if (file_put_contents($pathFile, $currentsongs))
-    {
-    $statusMessage = array('message' => 'Canción creada correctamente', "status" => "ok");
-    $statusCode = 200;
-
-  }
-  else
-    {
-    $statusMessage = array('message' => 'Problema al crear la canción.', "status" => "error");
-    $statusCode = 404;
-  }
-  $response = new WP_REST_Response($statusMessage, $statusCode);
-  $response->header('Access-Control-Allow-Origin', apply_filters('giar_access_control_allow_origin', '*'));
-  return $response;
-}
-
-
-/**
- *
- * Action que registra todos metodos disponibles
- */
 add_action('rest_api_init', function () {
-
   register_rest_route('hangar-api/v1', '/song', array(
     'methods' => 'GET',
     'callback' => 'searchsong',
@@ -429,7 +32,6 @@ add_action('rest_api_init', function () {
       ),
     ),
   ));
-
   register_rest_route('hangar-api/v1', '/song', array(
     'methods' => 'POST',
     'callback' => 'createsong',
@@ -439,13 +41,11 @@ add_action('rest_api_init', function () {
         'type' => 'string',
         'description' => __('URL de la canción.'),
       ),
-
       'songname' => array(
         'required' => true,
         'type' => 'string',
         'description' => __('Nombre de la canción.'),
       ),
-
       'artistid' => array(
         'required' => false,
         'type' => 'Integer',
@@ -468,7 +68,6 @@ add_action('rest_api_init', function () {
       ),
     ),
   ));
-
   register_rest_route('hangar-api/v1', '/song', array(
     'methods' => 'DELETE',
     'callback' => 'deleteSong',
@@ -480,7 +79,6 @@ add_action('rest_api_init', function () {
       ),
     ),
   ));
-
   register_rest_route('hangar-api/v1', '/song', array(
     'methods' => 'PUT',
     'callback' => 'updateSong',
@@ -495,13 +93,11 @@ add_action('rest_api_init', function () {
         'type' => 'string',
         'description' => __('URL de la canción.'),
       ),
-
       'songname' => array(
         'required' => false,
         'type' => 'string',
         'description' => __('Nombre de la canción.'),
       ),
-
       'artistid' => array(
         'required' => false,
         'type' => 'Integer',
@@ -523,9 +119,107 @@ add_action('rest_api_init', function () {
         'description' => __('Nombre del album.'),
       ),
     ),
-
   ));
-
 });
+
+/**
+ *
+ * Actualiza una canción por id.
+ *
+ *  array['parameters']
+ *          $parameters['url']
+ *          $parameters['songname']
+ *          $parameters['artistid']
+ *          $parameters['artistname']
+ *          $parameters['albumid']
+ *          $parameters['albumname'] 
+ * @param    $parameters  (ver arriba)
+ * @return   array
+ *
+ */
+function updateSong($parameters)
+{
+  $hangarApi = new WPHangarAPi();
+  $songId = (int)$parameters['id'];
+
+  $hangarApi->id = $songId;
+  $hangarApi->url = isset($parameters['url']) ? $parameters['url'] : null;
+  $hangarApi->songName = isset($parameters['songname']) ? $parameters['songname'] : null;
+  $hangarApi->artistiD = isset($parameters['artistid']) ? $parameters['artistid'] : null;
+  $hangarApi->artistName = isset($parameters['artistname']) ? $parameters['artistname'] : null;
+  $hangarApi->albumId = isset($parameters['albumid']) ? $parameters['albumid'] : null;
+  $hangarApi->albumName = isset($parameters['albumname']) ? $parameters['albumname'] : null;
+  return  $hangarApi->update();
+}
+
+/**
+ *
+ * Consulta o obtiene canciones por parametros. .
+ *
+ *  array['parameters']
+ *          $parameters['songname']
+ *          $parameters['artistname']
+ *          $parameters['albumname']
+ * @param    $parameters  (ver arriba)
+ * @return   array
+ *
+ */
+function searchsong($request_data)
+{
+  $results = array();
+  $parameters = $request_data->get_params();
+
+  $hangarApi = new WPHangarAPi();
+  $hangarApi->songname = isset($parameters['songname']) ? $parameters['songname'] : null;
+  $hangarApi->artistname = isset($parameters['artistname']) ? $parameters['artistname'] : null;
+  $hangarApi->albumname = isset($parameters['albumname']) ? $parameters['albumname'] : null;
+
+  return ($hangarApi->search());
+}
+/**
+ *
+ * Elimina una canción 
+ *
+ * $parameters
+ *     $parameters['id']
+ * @parameters    (ver arriba)
+ * @return   array
+ *
+ */
+function deleteSong($parameters)
+{
+  $songId = (int)$parameters['id'];
+
+  $hangarApi = new WPHangarAPi();
+  $hangarApi->id = $songId;
+  return $hangarApi->delete();
+}
+/**
+ *
+ * Crea una canción y guardar un canción.
+ *
+ *  array['parameters']
+ *          $parameters['url']
+ *          $parameters['songname']
+ *          $parameters['artistid']
+ *          $parameters['artistname']
+ *          $parameters['albumid']
+ *          $parameters['albumname'] 
+ * @param    $parameters  (ver arriba)
+ * @return   array
+ *
+ */
+function createSong($parameters)
+{
+  $hangarApi = new WPHangarAPi();
+  $hangarApi->url = isset($parameters['url']) ? $parameters['url'] : $hangarApi->url;
+  $hangarApi->songName = isset($parameters['songname']) ? $parameters['songname'] : $hangarApi->songName;
+  $hangarApi->artistiD = isset($parameters['artistid']) ? $parameters['artistid'] : $hangarApi->artistiD;
+  $hangarApi->artistName = isset($parameters['artistname']) ? $parameters['artistname'] : $hangarApi->artistName ;
+  $hangarApi->albumId = isset($parameters['albumid']) ? $parameters['albumid'] : $hangarApi->albumId ;
+  $hangarApi->albumName = isset($parameters['albumname']) ? $parameters['albumname'] : $hangarApi->albumName ;
+ 
+  return  $hangarApi->create();
+}
 
 ?>
