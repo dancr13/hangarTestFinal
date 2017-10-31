@@ -25,6 +25,22 @@ En el siguiente comando, edite el usuario que usa  para conectarse a mysql y eje
 
 > mysqldump -u root -p  testhangar  > testhangar.sql
 
+#### Accesos
+
+## Admin de wordpress
+
+>  suDomino/wp-admin
+
+1. Usuario: hangar
+2. Contraseña: 12345
+
+
+### API REST
+
+Lo siguiente explica cada operación permitida, los parametros aceptados y la respuesta en cada uno.
+
+
+
 
 
 
