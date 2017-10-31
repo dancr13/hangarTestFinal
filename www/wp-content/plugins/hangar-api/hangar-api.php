@@ -279,11 +279,18 @@ function deleteSong($parameters)
     $currentsongs= array('songs'=> $currentsongs);
     $currentsongs =  json_encode($currentsongs);
     
-    if(!file_put_contents($pathFile, $currentsongs));
+    if(file_put_contents($pathFile, $currentsongs))
     {
-       $update_success =array('message'=>'Canción creada correctamente');
+      $statusMessage =array('message'=>'Canción creada correctamente', "status"=> "ok");
+      $statusCode = 200;
+
     }
-    $response = new WP_REST_Response( $update_success );
+    else
+    {
+      $statusMessage =array('message'=>'Problema al crear la canción.', "status"=> "error");
+      $statusCode = 404;
+    }
+    $response = new WP_REST_Response( $statusMessage, $statusCode );
     $response->header( 'Access-Control-Allow-Origin', apply_filters( 'giar_access_control_allow_origin', '*' ) );
     return $response;
   }

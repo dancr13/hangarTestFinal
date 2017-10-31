@@ -90,7 +90,7 @@ function crearCancion() {
     }
 
     jQuery.ajax({
-        url: "http://wordpressdev.com/wp-json/hangar-api/v1/song?",
+        url: "/wp-json/hangar-api/v1/song?",
         type: 'POST',
         dataType: "json",
         data: JSON.stringify(parameters),
