@@ -84,11 +84,15 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
         dataType:"json",
         contentType:"application/json;charset=utf-8;",
         success: function (res) {
-                alert(res[0].message);
+            mensaje= JSON.parse(res.responseText);
+            mensaje = mensaje[0].message;
+            alert(mensaje);
         },
         error: function(res)
         {
-            alert(res[0].message);
+            mensaje= JSON.parse(res.responseText);
+            mensaje = mensaje[0].message;
+            alert(mensaje);
         }
     });
    ```
