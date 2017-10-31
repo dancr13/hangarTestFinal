@@ -23,7 +23,7 @@ Para este paso debe de configurar su servidor web ya sea apache o nginx.
 
 En el siguiente comando, edite el usuario que usa  para conectarse a mysql y ejecute lo siguiente:
 
-> mysqldump -u root -p  testhangar  > testhangar.sql
+> mysqldump -u root -p  testhangar  < testhangar.sql
 
 #### Accesos
 
