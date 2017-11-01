@@ -1,3 +1,7 @@
+/**
+ * Busca una o varias canciónes
+ * @return none
+ */
 function buscarCancion() {
 
     var nombreCancion, colummns, resultadosTabla, nombreCancion,
@@ -52,6 +56,10 @@ function buscarCancion() {
     });
 }
 
+/**
+ * Crea una canción
+ * @return none
+ */
 function crearCancion() {
 
     var idCancion, parameters;
@@ -115,6 +123,10 @@ function crearCancion() {
 
 }
 
+/**
+ * Limpia inputs
+ * @return none
+ */
 function cleanSectionCreate() {
     jQuery('#id-add-url').val('');
     jQuery('#id-add-songname').val('');
@@ -125,6 +137,10 @@ function cleanSectionCreate() {
     return;
 }
 
+/**
+ * Limpia inputs
+ * @return none
+ */
 function cleanSectionUpdate() {
     jQuery('#id-update-cancion').val('');
     jQuery('#id-update-url').val('');
@@ -133,9 +149,13 @@ function cleanSectionUpdate() {
     jQuery('#id-update-artistname').val('');
     jQuery('#id-update-albumid').val('');
     jQuery('#id-update-albumname').val('');
-
+    return;
 }
 
+/**
+ * Actualiza una canción por ID.
+ * @return none
+ */
 function actualizarCancion() {
 
     var idCancion, parameters;
@@ -201,6 +221,10 @@ function actualizarCancion() {
 
 }
 
+/**
+ * Borra una canción por ID.
+ * @return none
+ */
 function borrarCancion() {
     var idCancion, parameters, mensaje;
     idCancion = jQuery('#id-cancion').val();
@@ -231,5 +255,5 @@ function borrarCancion() {
             jQuery('#id-cancion').val('');
         }
     });
-
+    return;
 }
