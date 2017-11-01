@@ -21,9 +21,13 @@ Para este paso debe de configurar su servidor web ya sea apache o nginx.
 
 ## Cargar base de datos
 
-En el siguiente comando, edite el usuario que usa  para conectarse a mysql y ejecute lo siguiente:
+Una vez ingresado a mysql cre una base de datos con el siguiente comando:
 
-> mysqldump -u root -p  testhangar  < testhangar.sql
+> CREATE DATABASE  hangardelete;
+
+En el siguiente comando, edite el usuario que usa para conectarse a mysql, el nombre de la base de datos y ejecute lo siguiente:
+
+> mysql -u root -p  testhangar  < testhangar.sql
 
 Cambiar la configuración de la base de datos en: **wp-config.php**
 
