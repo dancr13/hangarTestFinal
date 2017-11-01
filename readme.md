@@ -59,10 +59,6 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
  
    `id=[integer]`
    
-* **Data Params**
-
-  None
-
 * **Respuesta exitosa:**
 
   * **Código:** 200 <br />
