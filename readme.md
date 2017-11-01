@@ -106,7 +106,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/borrar-wp.png)
 
-	*Nota:* Una vez levantado al sitio, en la pagina de inicio se puede ver esta funcionalidad.
+	*Nota:* Una vez levantado el sitio, en la pagina de inicio se puede usar esta funcionalidad.
     
 **Actualizar canción**
 ----
@@ -192,7 +192,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/actualizar-wp.png)
    
-   *Nota:* Una vez levantado al sitio, en la pagina de inicio se puede ver esta funcionalidad.
+   *Nota:* Una vez levantado el sitio, en la pagina de inicio se puede usar esta funcionalidad.
    
 **Buscar canción**
 ----
@@ -270,7 +270,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/list-wp.png)
    
-   *Nota:* Una vez levantado al sitio, en la pagina de inicio se puede ver esta funcionalidad.
+   *Nota:* Una vez levantado el sitio, en la pagina de inicio se puede usar esta funcionalidad.
 
 **Agregar  canción**
 ----
@@ -357,7 +357,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/crear-wp.png)
    
-   *Nota:* Una vez levantado al sitio, en la pagina de inicio se puede ver esta funcionalidad.
+   *Nota:* Una vez levantado el sitio, en la pagina de inicio se puede usar esta funcionalidad.
 
 
 
