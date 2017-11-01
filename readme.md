@@ -47,7 +47,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
   
 * **URL**
 
-  /wp-json/hangar-api/v1/song?id=
+  /wp-json/hangar-api/v1/song
 
 * **Métodos:**
 
@@ -93,15 +93,11 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
         dataType:"json",
         contentType:"application/json;charset=utf-8;",
         success: function (res) {
-            mensaje= JSON.parse(res.responseText);
-            mensaje = mensaje[0].message;
-            alert(mensaje);
+    
         },
         error: function(res)
         {
-            mensaje= JSON.parse(res.responseText);
-            mensaje = mensaje[0].message;
-            alert(mensaje);
+      
         }
     });
    ```
@@ -110,6 +106,8 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/borrar-wp.png)
 
+	*Nota:* Una vez levantado al sitio, en la pagina de inicio se puede ver esta funcionalidad.
+    
 **Actualizar canción**
 ----
   Actualiza una canción por un indentificador
@@ -180,13 +178,11 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
         data:   JSON.stringify(parameters),
         contentType:"application/json;charset=utf-8;",
         success: function (res) {
-            alert(res.message);
+  
         },
         error: function(res)
         {
-            res= JSON.parse(res.responseText);
-            mensaje = res.message;
-            alert(mensaje);
+         
         }
     });
 
@@ -195,6 +191,8 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    * **Desde el sitio**
    
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/actualizar-wp.png)
+   
+   *Nota:* Una vez levantado al sitio, en la pagina de inicio se puede ver esta funcionalidad.
    
 **Buscar canción**
 ----
@@ -220,7 +218,7 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    
    `artistname=[string]`
    
-   `albumname=[integer]`
+   `albumname=[string]`
    
    
 * **Respuesta exitosa:**
@@ -271,6 +269,8 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    * **Desde el sitio**
    
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/list-wp.png)
+   
+   *Nota:* Una vez levantado al sitio, en la pagina de inicio se puede ver esta funcionalidad.
 
 **Agregar  canción**
 ----
@@ -356,6 +356,8 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    * **Desde el sitio**
    
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/crear-wp.png)
+   
+   *Nota:* Una vez levantado al sitio, en la pagina de inicio se puede ver esta funcionalidad.
 
 
 
