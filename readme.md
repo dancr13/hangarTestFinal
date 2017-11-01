@@ -21,9 +21,9 @@ Para este paso debe de configurar su servidor web ya sea apache o nginx.
 
 ## Cargar base de datos
 
-Una vez ingresado a mysql cre una base de datos con el siguiente comando:
+Una vez ingresado a mysql puede crear una base de datos con el siguiente comando:
 
-> CREATE DATABASE  hangardelete;
+> CREATE DATABASE  testhangar;
 
 En el siguiente comando, edite el usuario que usa para conectarse a mysql, el nombre de la base de datos y ejecute lo siguiente:
 
