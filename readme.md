@@ -103,6 +103,10 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
         }
     });
    ```
+   
+   * **Desde el sitio**
+   
+   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/borrar-wp.png)
 
 **Actualizar canción**
 ----
@@ -185,6 +189,10 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
     });
 
    ```
+      
+   * **Desde el sitio**
+   
+   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/actualizar-wp.png)
    
 **Buscar canción**
 ----
@@ -257,6 +265,10 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
     });
 
    ```
+   
+   * **Desde el sitio**
+   
+   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/list-wp.png)
 
 **Agregar  canción**
 ----
@@ -338,6 +350,10 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
     });
 
    ```
+   
+   * **Desde el sitio**
+   
+   ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/crear-wp.png)
 
 
 
