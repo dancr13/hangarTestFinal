@@ -25,6 +25,8 @@ En el siguiente comando, edite el usuario que usa  para conectarse a mysql y eje
 
 > mysqldump -u root -p  testhangar  < testhangar.sql
 
+Cambiar la configuración de la base de datos en: **wp-config.php**
+
 #### Accesos
 
 ## Admin de wordpress
