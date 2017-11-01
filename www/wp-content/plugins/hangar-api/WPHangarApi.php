@@ -23,8 +23,6 @@ class WPHangarAPi
    */
   public function search()
   {
-
-
     $results = array();
     if (!isset($this->songName) && !isset($this->artistName) && !isset($this->albumName))
       {
@@ -119,11 +117,17 @@ class WPHangarAPi
     }
     else
       {
-      if (!file_put_contents($pathFile, $newListSong));
+      if (!file_put_contents($pathFile, $newListSong))
       {
         $response = array('message' => 'Canción actualizada', 'status' => 'ok');
         $codeResponse = 200;
       }
+      else
+      {
+        $response = array('message' => 'Error al actualizar la canción', 'status' => 'error');
+        $codeResponse = 404;
+      }
+
     }
 
     $response = new WP_REST_Response($response, $codeResponse);
@@ -173,12 +177,17 @@ class WPHangarAPi
     }
     else
       {
-      if (!file_put_contents($pathFile, $newListSong));
+      if (!file_put_contents($pathFile, $newListSong))
       {
         $response = array(
           array('message' => 'canción borrada', 'status' => 'ok'),
         );
         $codeResponse = 200;
+      }
+      else
+      {
+        $response = array('message' => 'Error al eliminar la canción', 'status' => 'error');
+        $codeResponse = 404;
       }
     }
 
