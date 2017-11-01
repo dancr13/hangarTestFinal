@@ -4,7 +4,7 @@ function buscarCancion() {
         nombreArtist, nombreAlbum, parameters;
 
     nombreCancion = document.getElementById("nombre-cancion").value;
-    colummns = '<tr><th>Canción</th><th>Artista</th><th>Album</th></tr>';
+    colummns = '<tr><th>ID</th><th>Canción</th><th>Artista</th><th>Album</th></tr>';
     resultadosTabla = '';
     nombreCancion = jQuery('#nombre-cancion').val();
     nombreArtista = jQuery('#artista-cancion').val();
@@ -31,13 +31,18 @@ function buscarCancion() {
             var songs = res.songs;
             jQuery.each(songs, function () {
                 resultadosTabla += '<tr>' +
+                    '<td>' + this.id + '</td>' +
                     '<td>' + this.songname + '</td>' +
                     '<td>' + this.artistname + '</td>' +
                     '<td>' + this.albumname + '</td>' +
                     '</tr>';
             });
-            jQuery("#resultados").html('');
-            jQuery("#resultados").append(colummns + resultadosTabla);
+
+            jQuery("#resultados").html(colummns + resultadosTabla);
+
+            jQuery('#nombre-cancion').val('');
+            jQuery('#artista-cancion').val('');
+            jQuery('#album-cancion').val('');
         },
         error: function (res) {
             mensaje = JSON.parse(res.responseText);
@@ -96,15 +101,38 @@ function crearCancion() {
         data: JSON.stringify(parameters),
         contentType: "application/json;charset=utf-8;",
         success: function (res) {
-            console.log(res);
+
             alert(res.message);
+            cleanSectionCreate();
         },
         error: function (res) {
             res = JSON.parse(res.responseText);
             mensaje = res.message;
             alert(mensaje);
+            cleanSectionCreate();
         }
     });
+
+}
+
+function cleanSectionCreate() {
+    jQuery('#id-add-url').val('');
+    jQuery('#id-add-songname').val('');
+    jQuery('#id-add-artistid').val('');
+    jQuery('#id-add-artistname').val('');
+    jQuery('#id-add-albumid').val('');
+    jQuery('#id-add-albumname').val('');
+    return;
+}
+
+function cleanSectionUpdate() {
+    jQuery('#id-update-cancion').val('');
+    jQuery('#id-update-url').val('');
+    jQuery('#id-update-songname').val('');
+    jQuery('#id-update-artistid').val('');
+    jQuery('#id-update-artistname').val('');
+    jQuery('#id-update-albumid').val('');
+    jQuery('#id-update-albumname').val('');
 
 }
 
@@ -112,7 +140,6 @@ function actualizarCancion() {
 
     var idCancion, parameters;
     parameters = {};
-
 
     idCancion = jQuery('#id-update-cancion').val();
     url = jQuery('#id-update-url').val();
@@ -162,11 +189,13 @@ function actualizarCancion() {
         contentType: "application/json;charset=utf-8;",
         success: function (res) {
             alert(res.message);
+            cleanSectionUpdate();
         },
         error: function (res) {
             res = JSON.parse(res.responseText);
             mensaje = res.message;
             alert(mensaje);
+            cleanSectionUpdate();
         }
     });
 
@@ -189,14 +218,15 @@ function borrarCancion() {
         dataType: "json",
         contentType: "application/json;charset=utf-8;",
         success: function (res) {
-            mensaje = JSON.parse(res.responseText);
-            mensaje = mensaje[0].message;
+            mensaje = res[0].message;
             alert(mensaje);
+            jQuery('#id-cancion').val('');
         },
         error: function (res) {
             mensaje = JSON.parse(res.responseText);
             mensaje = mensaje[0].message;
             alert(mensaje);
+            jQuery('#id-cancion').val('');
         }
     });
 

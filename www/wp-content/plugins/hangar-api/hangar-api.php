@@ -1,7 +1,7 @@
 <?php
    /*
    Plugin Name: Hangar  plugin
-   Description: Hangar prueba
+   Description: Este plugin expone una REST API.
    Version: 0
    Author: Daniel Bogarin
    License: GPL2

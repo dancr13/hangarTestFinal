@@ -568,3 +568,6 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
 
+remove_filter( 'the_content', 'wpautop' );
+
+remove_filter( 'the_excerpt', 'wpautop' );
