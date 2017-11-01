@@ -117,7 +117,7 @@ class WPHangarAPi
     }
     else
       {
-      if (!file_put_contents($pathFile, $newListSong))
+      if (file_put_contents($pathFile, $newListSong))
       {
         $response = array('message' => 'Canción actualizada', 'status' => 'ok');
         $codeResponse = 200;
@@ -177,7 +177,7 @@ class WPHangarAPi
     }
     else
       {
-      if (!file_put_contents($pathFile, $newListSong))
+      if (file_put_contents($pathFile, $newListSong))
       {
         $response = array(
           array('message' => 'canción borrada', 'status' => 'ok'),

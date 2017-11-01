@@ -218,11 +218,13 @@ function borrarCancion() {
         dataType: "json",
         contentType: "application/json;charset=utf-8;",
         success: function (res) {
+            console.log(res);
             mensaje = res[0].message;
             alert(mensaje);
             jQuery('#id-cancion').val('');
         },
         error: function (res) {
+            console.log(res);
             mensaje = JSON.parse(res.responseText);
             mensaje = mensaje[0].message;
             alert(mensaje);
