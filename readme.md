@@ -19,6 +19,14 @@ El código en este repositorio es un sitio wordpress, basicamente con dos plugin
 
 Para este paso debe de configurar su servidor web ya sea apache o nginx.
 
+## Permisos
+
+El archivo:
+
+/www/wp-content/plugins/hangar-api/songs.json
+
+Debe de tener permisos de escritura.
+
 ## Cargar base de datos
 
 Una vez ingresado a mysql puede crear una base de datos con el siguiente comando:
@@ -358,7 +366,6 @@ Lo siguiente explica cada operación permitida, los parametros aceptados y la re
    ![alt text](https://raw.githubusercontent.com/dbogarin88/hangarTestFinal/master/docs/img/crear-wp.png)
    
    *Nota:* Una vez levantado el sitio, en la pagina de inicio se puede usar esta funcionalidad.
-
 
 
 
